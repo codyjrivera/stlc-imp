@@ -22,4 +22,3 @@ let rec eval = function
           eval (subst (eval e2) (arg_name arg) (eval body))
       | _ -> App(redex, eval e2))
   | Annotated_expr(e1, _) -> eval e1
-
