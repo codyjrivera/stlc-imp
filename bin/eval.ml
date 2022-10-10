@@ -26,7 +26,7 @@ let rec eval = function
       (match eval c with
       | Bool(true) -> eval e1
       | Bool(false) -> eval e2
-      | _ -> failwith "typechecker's broken in ITE")
+      | _ -> Ite(c, e1, e2))
   | Abs(arg, body) -> Abs(arg, body)
   | Let(var, init, body) -> 
       let redex = eval init in
@@ -38,3 +38,4 @@ let rec eval = function
           eval (subst (eval e2) (arg_name arg) (eval body))
       | _ -> App(redex, eval e2))
   | Annotated_expr(e1, _) -> eval e1
+
