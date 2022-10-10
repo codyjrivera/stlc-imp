@@ -11,7 +11,7 @@ let rec eval = function
       | Bool(true) -> eval e1
       | Bool(false) -> eval e2
       | _ -> Ite(c, e1, e2))
-  | Abs(arg, body) -> Abs(arg, body)
+  | Abs(arg, body) -> Abs(arg, eval body)
   | Let(var, init, body) -> 
       let redex = eval init in
       eval (subst redex (arg_name var) (eval body))
