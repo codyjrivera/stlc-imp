@@ -3,22 +3,6 @@ open Ast
 
 exception Error of string
 
-type env_item = 
-  | Entry of string * expr
-type env = env_item list
-
-let rec lookup var = function
-  | [] -> None
-  | (Entry(id, e) :: t) ->
-      if String.equal id var then 
-        Some(Entry(id, e))
-      else
-        lookup var t
-
-let add j env = j :: env
-
-let empty_env = []
-
 let rec eval = function
   | Bool(b) -> Bool(b)
   | Var(v) -> Var(v)
